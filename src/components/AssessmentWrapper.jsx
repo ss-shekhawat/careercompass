@@ -30,8 +30,8 @@ import { useAssessmentMutations } from "../hooks/useAssessmentMutations";
 import { useApiErrorHandling } from "../hooks/useApiErrorHandling";
 
 import StudentLayout from "./StudentLayout";
-import AssessmentTestScreen from "../pages/student/Assessment/AssessmentTestScreen";
-import AssessmentSelectScreen from "../pages/student/Assessment/AssessmentSelectScreen";
+import AssessmentTestScreen from "../pages/student/assessment/AssessmentTestScreen";
+import AssessmentSelectScreen from "../pages/student/assessment/AssessmentSelectScreen";
 import ThankYouScreen from "./Ui/ThankYouScreen";
 import AssessmentSummary from "./assessment/AssessmentSummary";
 
