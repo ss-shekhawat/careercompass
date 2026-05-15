@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" width="280" height="60">
+  <!-- Compass icon -->
+  <circle cx="30" cy="30" r="26" fill="#2563EB"/>
+  <polygon points="30,12 36,28 48,30 36,32 30,48 24,32 12,30 24,28" fill="#FBBF24"/>
+  <circle cx="30" cy="30" r="3.5" fill="#FFFFFF"/>
+  
+  <!-- Wordmark -->
+  <text x="68" y="38" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="600" fill="#0F172A">Career</text>
+  <text x="148" y="38" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="600" fill="#2563EB">Compass</text>
+</svg>

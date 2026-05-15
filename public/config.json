@@ -1,0 +1,18 @@
+{
+    "local": {
+        "API_BASE_URL": "https://devbe.career-mitra.com",
+        "ENV": "local"
+    },
+    "dev": {
+        "API_BASE_URL": "https://devbe.career-mitra.com",
+        "ENV": "dev"
+    },
+    "stage": {
+        "API_BASE_URL": "https://stagebe.career-mitra.com",
+        "ENV": "stage"
+    },
+    "prod": {
+        "API_BASE_URL": "https://backend.career-mitra.com",
+        "ENV": "prod"
+    }
+}

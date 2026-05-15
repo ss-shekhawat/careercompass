@@ -1,0 +1,66 @@
+// ===================================================================
+// CareerCompass — Color System
+// Palette: Sky Blue (primary) + Coral (accent) + Amber (highlight)
+// ===================================================================
+// NOTE: Variable names are preserved from the old palette so existing
+// components keep working. Only the color VALUES have changed.
+// ===================================================================
+
+// ---- Brand colors (your old names, new values) ----
+$primary-color: #2563eb; // Sky Blue   (was #0B7B7C teal)
+$secondary-color: #ff6b6b; // Coral      (was #FBA339 orange)
+$tersary-color: #1d4ed8; // Deep Blue  (was #006668 dark teal)
+
+$primary-background: #2563eb;
+$secondary-background: #ff6b6b;
+$tersary-background: #1d4ed8;
+
+// ---- Text colors ----
+$white-text: #ffffff;
+$black-text: #0f172a; // Soft black (better than pure #000)
+
+// ---- Typography ----
+$primary-font: "Inter", "Montserrat", sans-serif;
+
+// ---- Surfaces ----
+$white-background: #ffffff;
+$gray-background: #f1f5f9; // Lighter, more modern (was #E6E0E0)
+$gray-color: rgba(15, 23, 42, 0.7);
+$gray-dark-color: #e2e8f0;
+$black-background: #0f172a;
+
+// ---- Borders ----
+$border-color: #ff6b6b; // matches new accent
+
+// ---- Status / utility ----
+$text-danger: #bf1a1a;
+
+// ===================================================================
+// NEW additions — feel free to use these in future components
+// ===================================================================
+$accent-color: #ff6b6b; // alias for clarity
+$highlight-color: #fbbf24; // Amber — for badges, callouts, CTAs
+$highlight-light: #fcd34d;
+$highlight-dark: #f59e0b;
+
+$primary-light: #3b82f6;
+$primary-dark: #1d4ed8;
+$primary-50: #eff6ff; // very light blue tint for backgrounds
+$primary-100: #dbeafe;
+
+$text-primary: #0f172a;
+$text-secondary: #475569;
+$text-tertiary: #94a3b8;
+
+$bg-primary: #ffffff;
+$bg-secondary: #f8fafc;
+$bg-tertiary: #f1f5f9;
+
+$border-subtle: #e2e8f0;
+$border-default: #cbd5e1;
+
+// Status colors
+$status-success: #10b981;
+$status-warning: #fbbf24;
+$status-error: #ef4444;
+$status-info: #2563eb;
