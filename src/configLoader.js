@@ -1,26 +1,45 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
-import { Provider } from "react-redux";
-import { store, persistor } from "./redux/store.js";
-import { PersistGate } from "redux-persist/integration/react";
-import ErrorBoundary from "./components/ErrorBoundary.jsx";
-import { HelmetProvider } from "react-helmet-async";
-import { configReady } from "./configLoader.js";
+export async function loadConfig() {
+  try {
+    const response = await fetch("/config.json", { cache: "no-cache" });
+    if (!response.ok) {
+      throw new Error(`config.json HTTP ${response.status}`);
+    }
+    const allConfigs = await response.json();
 
-configReady.then(() => {
-  ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <ErrorBoundary>
-            <HelmetProvider>
-              <App />
-            </HelmetProvider>
-          </ErrorBoundary>
-        </PersistGate>
-      </Provider>
-    </React.StrictMode>,
-  );
-});
+    const hostname = window.location.hostname;
+    let envKey = "local";
+
+    if (hostname.startsWith("stage.")) envKey = "stage";
+    else if (hostname.startsWith("dev.")) envKey = "dev";
+    else if (hostname.endsWith("vercel.app")) envKey = "prod";
+
+    const chosen = allConfigs[envKey] || allConfigs.local;
+
+    if (!chosen || !chosen.API_BASE_URL) {
+      console.error(
+        "⚠️ Config loaded but API_BASE_URL missing. envKey =",
+        envKey,
+        "allConfigs =",
+        allConfigs,
+      );
+      // Hard-coded fallback so the app still functions if config.json is malformed.
+      window.RUNTIME_CONFIG = {
+        API_BASE_URL: "https://careercompass-api-iiai.onrender.com",
+        ENV: "fallback",
+      };
+      return;
+    }
+
+    window.RUNTIME_CONFIG = chosen;
+    console.log("✅ RUNTIME_CONFIG loaded:", chosen);
+  } catch (error) {
+    console.error("❌ Failed to load config.json:", error);
+    // Same hard-coded fallback. Means the app still works even if the JSON file vanishes.
+    window.RUNTIME_CONFIG = {
+      API_BASE_URL: "https://careercompass-api-iiai.onrender.com",
+      ENV: "fallback",
+    };
+  }
+}
+
+export const configReady = loadConfig();
