@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLogout } from "./reducers/userInfo/userInfoSlice";
+import { configReady } from "./configLoader";
 
 function getBaseUrl() {
   const config = window.RUNTIME_CONFIG;
@@ -11,6 +12,7 @@ function getBaseUrl() {
 }
 
 const dynamicBaseQuery = async (args, api, extraOptions) => {
+  await configReady;
   const baseUrl = getBaseUrl();
   const rawBaseQuery = fetchBaseQuery({
     baseUrl: baseUrl,
@@ -29,7 +31,7 @@ const dynamicBaseQuery = async (args, api, extraOptions) => {
 
   if (result.error && result.error.status === 401) {
     // Skip logout and redirect for login endpoint, as 401 is expected for invalid credentials
-    if (!args.url.includes('/auth/login')) {
+    if (!args.url.includes("/auth/login")) {
       api.dispatch(userLogout());
       window.location.href = "/";
     }
