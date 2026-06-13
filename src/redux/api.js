@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLogout } from "./reducers/userInfo/userInfoSlice";
-import { configReady } from "./configLoader";
+import { configReady } from "../configLoader";
 
 function getBaseUrl() {
   const config = window.RUNTIME_CONFIG;
