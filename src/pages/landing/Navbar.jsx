@@ -100,35 +100,77 @@ const Navbar = () => {
             ×
           </Buttons>
         </div>
-        <nav className="flex flex-col p-4">
-          {[
-            { href: "/", label: "Home" },
-            { href: "#services", label: "Services" },
-            { href: "#about", label: "About Us" },
-            { href: "#contact us", label: "Contact Us" },
-            { label: "Get Started", action: handleClick },
-          ].map((item, idx) =>
-            item.action ? (
+
+        <nav className="flex flex-col p-4 gap-1">
+          <a
+            href="/"
+            className="p-3 primary-color rounded-lg"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Home
+          </a>
+          <a
+            href="#services"
+            className="p-3 primary-color rounded-lg"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Services
+          </a>
+          <a
+            href="#about"
+            className="p-3 primary-color rounded-lg"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            About Us
+          </a>
+          <a
+            href="#contact us"
+            className="p-3 primary-color rounded-lg"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Contact Us
+          </a>
+          <button
+            onClick={() => {
+              handleGetStarted();
+              setIsMenuOpen(false);
+            }}
+            className="p-3 primary-color rounded-lg text-left"
+          >
+            Get Started
+          </button>
+
+          {isLoggedIn ? (
+            <>
               <button
-                key={idx}
                 onClick={() => {
-                  item.action();
+                  goToDashboard();
                   setIsMenuOpen(false);
                 }}
                 className="p-3 primary-color rounded-lg text-left"
               >
-                {item.label}
+                Dashboard
               </button>
-            ) : (
-              <a
-                key={idx}
-                href={item.href}
-                className="p-3 primary-color rounded-lg"
-                onClick={() => setIsMenuOpen(false)}
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsMenuOpen(false);
+                }}
+                className="p-3 primary-color rounded-lg text-left text-red-600"
               >
-                {item.label}
-              </a>
-            ),
+                Logout
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => {
+                handleLogin();
+                setIsMenuOpen(false);
+              }}
+              className="p-3 primary-color rounded-lg text-left"
+            >
+              Login
+            </button>
           )}
         </nav>
       </div>
