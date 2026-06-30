@@ -1,14 +1,25 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { LogIn, LogOut, LayoutDashboard } from "lucide-react";
 import Buttons from "../../components/Ui/Buttons";
-import { useSelector } from "react-redux";
-import { LogIn } from "lucide-react";
+import { userLogout } from "../../redux/reducers/userInfo/userInfoSlice";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.userInfo);
+
+  // Logged-in check that handles role being either a string or array
+
+  const isLoggedIn = Boolean(token && user);
+  const roles = isLoggedIn
+    ? Array.isArray(user.role)
+      ? user.role
+      : [user.role]
+    : [];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,20 +31,30 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const handleClick = () => {
-    if (token && user) {
-      const roles = Array.isArray(user.role) ? user.role : [user.role];
-
-      if (roles.includes("student")) {
-        navigate("/student/dashboard");
-        return;
-      }
+  const handleGetStarted = () => {
+    if (isLoggedIn && roles.includes("students")) {
+      navigate("/student/dashboard");
+      return;
     }
 
     navigate("/prepayment");
   };
-  const handleNavigate = () => {
-    navigate("/login");
+  const goToDashboard = () => {
+    if (roles.includes("admin") || roles.includes("super_admin")) {
+      navigate("/admin/dashborad");
+    } else if (roles.includes("counsellor")) {
+      navigate("counsellor/dashboard");
+    } else {
+      navigate("/stdent/dashboard");
+    }
+  };
+
+  const handleLogin = () => navigate("/login");
+
+  const handleLogout = () => {
+    dispatch(userLogout());
+    localStorage.removeItem(authToken); // belt - and- suspenders
+    navigate("/");
   };
 
   return (
@@ -42,7 +63,7 @@ const Navbar = () => {
         isScrolled ? "white-background shadow-lg" : "white-background"
       }`}
     >
-      {/* Logo — Version B: Split (icon SVG + text rendered with React) */}
+      {/* Logo — ) */}
       <div
         className="cursor-pointer flex items-center gap-2"
         onClick={() => {
