@@ -45,7 +45,7 @@ const Navbar = () => {
     } else if (roles.includes("counsellor")) {
       navigate("counsellor/dashboard");
     } else {
-      navigate("/stdent/dashboard");
+      navigate("/student/dashboard");
     }
   };
 
