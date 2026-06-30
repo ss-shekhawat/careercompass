@@ -198,14 +198,37 @@ const Navbar = () => {
         </a>
       </div>
 
-      <div className="hidden md:flex xl:mr-14">
-        <Buttons
-          onClick={handleNavigate}
-          className="secondary-background white-text rounded-full font-semibold px-6 py-2 text-sm outline-none focus:ring-1 border-none"
-        >
-          Login
-          <LogIn className="w-4 h-4 ml-2 mr-2 text-white inline-block" />
-        </Buttons>
+      {/* Desktop right side — Login OR Dashboard+Logout */}
+      <div className="hidden md:flex items-center gap-2 xl:mr-14">
+        {isLoggedIn ? (
+          <>
+            <span className="primary-color font-medium text-sm hidden lg:inline-block mr-2">
+              Hi, {user.full_name?.split(" ")[0] || "there"}
+            </span>
+            <Buttons
+              onClick={goToDashboard}
+              className="secondary-background white-text rounded-full font-semibold px-4 py-2 text-sm border-none"
+            >
+              <LayoutDashboard className="w-4 h-4 mr-2 text-white inline-block" />
+              Dashboard
+            </Buttons>
+            <Buttons
+              onClick={handleLogout}
+              className="rounded-full font-semibold px-4 py-2 text-sm border border-red-500 text-red-600 bg-white hover:bg-red-50"
+            >
+              <LogOut className="w-4 h-4 mr-2 inline-block" />
+              Logout
+            </Buttons>
+          </>
+        ) : (
+          <Buttons
+            onClick={handleLogin}
+            className="secondary-background white-text rounded-full font-semibold px-6 py-2 text-sm border-none"
+          >
+            Login
+            <LogIn className="w-4 h-4 ml-2 text-white inline-block" />
+          </Buttons>
+        )}
       </div>
     </div>
   );
